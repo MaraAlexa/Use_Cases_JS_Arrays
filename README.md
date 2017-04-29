@@ -1,6 +1,6 @@
 # Understanding JS Arrays with Practical Use Cases
 
-## Use **_.concat_** to Add Values to an Array
+## Use  * _.concat()_  *  to Add Values to an Array
 ```javascript
 // with .concat you can Add values(of mixed types) to an Array
 var items = [1,2];
