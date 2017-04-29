@@ -80,7 +80,7 @@ if(process.argv[2] === 'help'){
 */
 ```
 here is what the user would get if he runs help in command line
-![alt text](/Users/maraaalexa/Desktop/mara/Use_Cases_JS_Arrays/images/terminal.png "Logo Title Text 1")
+![alt text](/images/terminal.png "Logo Title Text 1")
 
 _**#2. Lets say You want to Upper Case the first letter of each word in a String**_
 ```javascript
