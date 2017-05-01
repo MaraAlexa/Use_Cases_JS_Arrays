@@ -86,10 +86,73 @@ _**#2. Lets say You want to Upper Case the first letter of each word in a String
 ```javascript
 var name = 'shane osbourne';
 
-var upper = name.split(' ') // [shane, osbourne]
+var upper = name.split(' ') // creates an array [shane, osbourne]
 .map(x => x.charAt(0).toUpperCase() + x.slice(1)) // produces another array: [Shane, Osbourne]
 .join(' '); //  creates a string: 'Shane Osbourne'
 
 console.log(upper); // 'Shane Osbourne'
 
+```
+## *_indexOf()_* is used to search an Array for a particular value
+### Practical Use Cases
+_**#1. Search for particular Strings in an array**_
+```javascript
+// Array.prototype.indexOf()
+
+var family = ['Shane', 'Sally', 'Isaac', 'Kittie'];
+// check if a value in an Array already exists
+var kittieExists = family.indexOf('Kittie') > -1;
+
+console.log(family.indexOf('Kittie')); // 3 -> Kittie was found at index 3; when the value is NOT FOUND you get -1;
+console.log(kittieExists); // true
+
+if(!kittieExists){ // if kittie does nOT exist
+  family.push('kittie'); // add it to the array
+}
+```
+_**#2. Search for particular Object Values in an array**_
+```javascript
+// Array.prototype.indexOf()
+
+// lets say we have 3 objects
+var shane = {
+  name: 'Shane'
+}
+var sally = {
+  name: 'Sally'
+}
+var kittie = {
+  name: 'Kittie'
+}
+
+var family = [shane, sally]; // array of objects containing shane and sally
+
+// search for the kittie object in family
+console.log(family.indexOf(kittie)); // -1 -> when the value is NOT FOUND you get -1;
+
+```
+_**#3. How to use indexOf() to create a filter**_
+```javascript
+var whitelist = ['.css', '.js'];
+
+var events = [
+  {
+    file: 'css/core.css'
+  },
+  {
+    file: 'js/app.js'
+  },
+  {
+    file: 'index.html'
+  }
+];
+// filter the events Array based on wether or not the extension of the files matches anything on the whitelist
+var filtered = events.filter(event => {
+  // use the path module to get the file extension
+  var ext = require('path').extname(event.file);
+  // check if this file ext is part of the whitelist and therefor should be allowed on the filtered results
+  return whitelist.indexOf(ext) > -1;
+});
+
+console.log(filtered);// [{file: 'css/core.css'}, {file: 'js/app.js'}]
 ```
