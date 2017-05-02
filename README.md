@@ -250,7 +250,7 @@ var lessons = [
         views: 1025
     }
 ];
-// sort the lessons based on views number(biggest to smallest)
+// sort the lessons based on views number (biggest to smallest)
 var list = lessons
     .sort((a, b) => b.views - a.views) // gives back a new sorted array
 
@@ -266,7 +266,7 @@ console.log(output);
 var container = document.querySelector('#output');
 container.innerHTML = output;
 
-// You get in console
+// what You get in console:
 <ul>
     <li>Javascript Array methods in depth - slice (1050)</li>
     <li>Javascript Array methods in depth - join (1025)</li>
