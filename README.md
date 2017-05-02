@@ -61,7 +61,7 @@ console.log(names.join(''));  // ShaneOsbourne
 console.log(names.join());  // when not providing any arg at all, you get the values separated with a comma -> Shane,Osbourne
 
 ```
-###  Practical Use Cases:
+####  Practical Use Cases:
 _**#1. Lets say you have a command line program and you want to provide a help screen to users**_
 ```javascript
 
@@ -94,7 +94,7 @@ console.log(upper); // 'Shane Osbourne'
 
 ```
 ## *_indexOf()_* is used to search an Array for a particular value
-### Practical Use Cases
+#### Practical Use Cases
 _**#1. Search for particular Strings in an array**_
 ```javascript
 // Array.prototype.indexOf()
@@ -169,7 +169,7 @@ console.log(filtered);// [{file: 'css/core.css'}, {file: 'js/app.js'}]
   console.log(copy); // [100,2,3,4,5,6]
   console.log(items); // [1,2,3,4,5]
 ```
-### Practical Use Case
+#### Practical Use Case
 ```javascript
 var person  = {
     name: 'shane-osbourne'
@@ -198,4 +198,78 @@ var output   = sections
     }, ref); // start with the ref "shane-osbourne"
 
 console.log(output); //"SHANE OSBOURNE"
+```
+## Sort an Array alphabetically or numerically
+```javascript
+// Array.prototype.sort()
+
+// when using sort with numbers; the numbers are being converted to strings first and then compared using their position in unicode
+
+var items = [10,30,20];
+items.sort(); // [10,20,30]
+
+// ISSUE (wrong result) when you have different ranges of numbers(bc of the unicode position)
+var items = [10,30,2,20];
+items.sort(); // WRONG result [10,2,20,30]
+
+// SOLUTION (compare the current with next item  using the sorting algorthm)
+// 1. sort in INCREASING order
+items.sort((a, b) => a - b); // GOOD result [2,10,20,30]
+// 1. sort in DECREASING order
+items.sort((a, b) => b - a); // GOOD result [30, 20, 10, 2]
+
+```
+### How the sorting algorithm works
+```javascript
+items.sort((a, b) =>{
+  console.log(a-b); // [2,10,20,30]
+  if (a - b === 0){
+    return 0;
+  }
+  if (a - b < 0){
+    return -1;
+  }
+  if (a - b > 0){
+    return 1;
+  }
+})
+```
+#### Practical use Cases
+```javascript
+var lessons = [
+    {
+        title: 'Javascript Array methods in depth - concat',
+        views: 1000
+    },
+    {
+        title: 'Javascript Array methods in depth - slice',
+        views: 1050
+    },
+    {
+        title: 'Javascript Array methods in depth - join',
+        views: 1025
+    }
+];
+// sort the lessons based on views number(biggest to smallest)
+var list = lessons
+    .sort((a, b) => b.views - a.views) // gives back a new sorted array
+
+    // for each item in the array give an <li> tag with some padding; accessing the title and the views
+    .map(x => `    <li>${x.title} (${x.views})</li>`)
+    .join('\n'); // join all the <li> together with a new line character
+
+// merge all our <li> tags into a <ul>
+var output = `<ul>\n${list}\n</ul>`;
+console.log(output);
+
+// select the output div and put the ul in it
+var container = document.querySelector('#output');
+container.innerHTML = output;
+
+// You get in console
+<ul>
+    <li>Javascript Array methods in depth - slice (1050)</li>
+    <li>Javascript Array methods in depth - join (1025)</li>
+    <li>Javascript Array methods in depth - concat (1000)</li>
+</ul>
 ```
