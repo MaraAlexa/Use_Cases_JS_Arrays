@@ -219,7 +219,7 @@ items.sort((a, b) => a - b); // GOOD result [2,10,20,30]
 items.sort((a, b) => b - a); // GOOD result [30, 20, 10, 2]
 
 ```
-### How the sorting algorithm works
+#### How the sorting algorithm works
 ```javascript
 items.sort((a, b) =>{
   console.log(a-b); // [2,10,20,30]
