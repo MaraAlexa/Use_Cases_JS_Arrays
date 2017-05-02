@@ -156,3 +156,46 @@ var filtered = events.filter(event => {
 
 console.log(filtered);// [{file: 'css/core.css'}, {file: 'js/app.js'}]
 ```
+## Create a shallow Copy of an Array with slice()
+```javascript
+// Array.prototype.slice()
+  var items = [1,2,3,4,5];
+  var copy = items.slice();
+
+  // anything we do to the copy won't affect the original Array
+  copy.push(6);
+  copy[0] = 100;
+
+  console.log(copy); // [100,2,3,4,5,6]
+  console.log(items); // [1,2,3,4,5]
+```
+### Practical Use Case
+```javascript
+var person  = {
+    name: 'shane-osbourne'
+};
+
+var filters = {
+    'deslugify': x => x.replace('-', ' '),
+    'uppercase': x => x.toUpperCase()
+};
+
+var input    = 'name | deslugify | uppercase';
+
+var sections = input.split('|').map(x => x.trim()); // ["name", "deslugify", "uppercase"]
+console.log(sections);
+
+var ref      = person[sections[0]]; // "shane-osbourne"
+var output   = sections
+    .slice(1) // ["deslugify", "uppercase"]
+
+    .reduce((prev, next) => {
+      // if filters exists that matches the name of deslugify or uppercase
+        if (filters[next]) { // if filters[deslugify] exists
+            return filters[next].call(null, prev);// return the result of calling filters with no context and prev value; prev is ref
+        }
+        return prev; // if filters[next] did not exist, give prev value
+    }, ref); // start with the ref "shane-osbourne"
+
+console.log(output); //"SHANE OSBOURNE"
+```
