@@ -273,3 +273,90 @@ container.innerHTML = output;
     <li>Javascript Array methods in depth - concat (1000)</li>
 </ul>
 ```
+## Filter an array with Truthy values (creating a new array with all the elemnts that pass a certain test)
+
+``` javascript
+var people = [
+  {
+    name: 'Shane',
+    pets: ['cats', 'dog']
+  },
+  {
+    name: 'Simon',
+    pets: ['horse']
+  },
+  {
+    name: 'Ben',
+    pets: [] // this has length 0 => falsy value
+  }
+]
+
+// filter for people that have pets (truthy values)
+var filtered = people.filter(x => x.pets.length)
+console.log(filtered); // [ {name:'Shane',pets:...},     {...:'Simon', ...} ]
+
+// you can also filter for people with pets if the property pets for a certain element does not exist at all.
+var people = [
+  {
+    name: 'Shane',
+    pets: ['cats', 'dog']
+  },
+  {
+    name: 'Simon',
+    pets: ['horse']
+  },
+  {
+    name: 'Ben',
+  //  property pets does not exist for Ben => x.pets is undefined
+  }
+]
+
+// filter for people that have pets (truthy values)
+var filtered = people.filter(x => x.pets)
+console.log(filtered); // [ {name:'Shane',pets:...},     {...:'Simon', ...} ]
+
+```
+### Filter the lesson array based on a tag given and the number of views
+```javascript
+const lessons = [
+    {
+        title: 'Javascript Arrays in Depth - join',
+        views: 960,
+        tags: ['array', 'join']
+    },
+    {
+        title: 'Javascript Arrays in Depth - concat',
+        views: 1050,
+        tags: ['array', 'concat']
+    },
+    {
+        title: 'Javascript Arrays in Depth - slice',
+        views: 2503,
+        tags: ['array', 'slice']
+    },
+    {
+        title: 'Javascript Functions in Depth - bind',
+        views: 2500,
+        tags: ['functions', 'bind']
+    }
+];
+
+var minViews = 1000;
+var searchTerm = 'array';
+
+var filtered = lessons
+  // filter for lessons that contain the target word
+  .filter(x => x.tags.indexOf(searchTerm) > -1)
+  // filter for lessen that have more than 1000 views
+  .filter(x => x.views > minViews)
+  // change the order of the results, most popular gets first (descending order)
+  .sort((a,b) => b.views - a.views)
+  // put each result in a li tag containing just the title
+  .map(x => `  <li>${x.title}</li>`)
+  .join('\n');
+
+  console.log(`<ul>
+                  ${filtered}
+                </ul>`);
+```
+;
